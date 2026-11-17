@@ -3,7 +3,7 @@
 **Proyecto:** Estructura demográfica de México: análisis estadístico descriptivo de la población por edad y sexo con R  
 **Repositorio:** `estructura-demografica-mexico`  
 **Documento:** `documentacion/protocolo_metodologico.md`  
-**Versión:** 1.0 — 17 de noviembre de 2026  
+**Versión:** 1.1 — 17 de noviembre de 2026  
 **Estado:** Protocolo previo a la ejecución de los scripts de R
 
 ## 1. Propósito
@@ -105,7 +105,7 @@ Los valores de V09 y V10 son **cifras de control tomadas de la descarga original
 
 ## 6. Definiciones, cálculos y denominadores
 
-Sea \(N_{esg}\) el número de personas del territorio \(e\), grupo de edad \(g\) y categoría de sexo \(s\). No se utilizará `Total` simultáneamente con sus categorías desglosadas para realizar una suma.
+Sea $N_{esg}$ el número de personas del territorio $e$, grupo de edad $g$ y categoría de sexo $s$. No se utilizará `Total` simultáneamente con sus categorías desglosadas para realizar una suma.
 
 ### 6.1. Frecuencias absolutas
 
@@ -113,11 +113,15 @@ Para cada territorio se reportará el conteo de personas según grupo de edad y 
 
 ### 6.2. Frecuencias relativas y porcentajes
 
-Para una categoría con recuento \(n_g\) y población de referencia \(N\):
+Para una categoría con recuento $n_g$ y población de referencia $N$:
 
-\[
- f_g=\frac{n_g}{N},\qquad p_g=100\,\frac{n_g}{N}.
-\]
+```math
+f_g = \frac{n_g}{N}
+```
+
+```math
+p_g = 100 \times \frac{n_g}{N}
+```
 
 Se distinguirán explícitamente dos posibles denominadores:
 
@@ -140,26 +144,29 @@ Los tres grupos cubren únicamente la población **con edad especificada**; si s
 
 ### 6.4. Relación hombres-mujeres
 
-\[
-\text{Relación hombres-mujeres}=100\frac{H}{M},
-\]
+```math
+\text{Relación hombres-mujeres} = 100 \times \frac{H}{M}
+```
 
-con \(H\) hombres y \(M\) mujeres de la misma población de referencia. Interpretación: número de hombres por cada 100 mujeres. No se calculará si \(M=0\). Para comparar territorios se utilizará la fila `Total` de cada uno, salvo cuando se declare expresamente una razón por edad.
+con $H$ hombres y $M$ mujeres de la misma población de referencia. Interpretación: número de hombres por cada 100 mujeres. No se calculará si $M=0$. Para comparar territorios se utilizará la fila `Total` de cada uno, salvo cuando se declare expresamente una razón por edad.
 
 ### 6.5. Razón de dependencia demográfica
 
-\[
-\text{Razón de dependencia}=100\frac{P_{0-14}+P_{65+}}{P_{15-64}}.
-\]
+```math
+\text{Razón de dependencia} = 100 \times \frac{P_{0-14} + P_{65+}}{P_{15-64}}
+```
 
-El numerador y denominador se construirán solamente con edades **especificadas**, bajo los mismos cortes en todo el país. Se exigirá \(P_{15-64}>0\). Este índice expresa una **relación entre grupos etarios**, no una medición directa de dependencia económica, ocupación ni transferencias intrafamiliares.
+El numerador y denominador se construirán solamente con edades **especificadas**, bajo los mismos cortes en todo el país. Se exigirá $P_{15-64}>0$. Este índice expresa una **relación entre grupos etarios**, no una medición directa de dependencia económica, ocupación ni transferencias intrafamiliares.
 
 Se podrán descomponer sus componentes para fines descriptivos:
 
-\[
-\text{Dependencia infantil}=100\frac{P_{0-14}}{P_{15-64}},\qquad
-\text{Dependencia de adultos mayores}=100\frac{P_{65+}}{P_{15-64}}.
-\]
+```math
+\text{Dependencia infantil} = 100 \times \frac{P_{0-14}}{P_{15-64}}
+```
+
+```math
+\text{Dependencia de adultos mayores} = 100 \times \frac{P_{65+}}{P_{15-64}}
+```
 
 ### 6.6. Medidas no identificables exactamente
 
@@ -279,6 +286,7 @@ Instituto Nacional de Estadística y Geografía. (s. f.). *Población total por 
 | Versión | Fecha | Cambio |
 |---|---|---|
 | 1.0 | 2026-11-17 | Establecimiento inicial del protocolo para el Censo 2020 y la programación descriptiva en R. |
+| 1.1 | 2026-11-17 | Corrección del formato matemático para visualización en GitHub, sin modificar definiciones ni criterios metodológicos. |
 
 ---
 
