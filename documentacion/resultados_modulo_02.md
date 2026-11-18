@@ -2,12 +2,12 @@
 
 ## Proyecto: Estructura demográfica de México
 
-**Autor:** Aldo Rodríguez Lechuga  
-**Lenguaje de programación:** R  
-**Fuente:** Censo de Población y Vivienda 2020, INEGI  
-**Alcance:** Nacional y estatal  
-**Enfoque metodológico:** Estadística descriptiva  
-**Estado:** Completado y validado  
+- **Autor:** Aldo Rodríguez Lechuga
+- **Lenguaje de programación:** R
+- **Fuente:** Censo de Población y Vivienda 2020, INEGI
+- **Alcance:** Nacional y estatal
+- **Enfoque metodológico:** Estadística descriptiva
+- **Estado:** Completado y validado
 
 ---
 

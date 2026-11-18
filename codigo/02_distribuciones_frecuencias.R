@@ -304,31 +304,31 @@ tabla_edad$frecuencia_porcentual_acumulada <-
 # ------------------------------------------------------------
 
 validacion_frecuencias_edad <- c(
-  
+
   absoluta = sum(
     tabla_edad$frecuencia_absoluta
   ) == N_edad,
-  
+
   relativa = abs(
     sum(tabla_edad$frecuencia_relativa) - 1
   ) < 1e-10,
-  
+
   porcentual = abs(
     sum(tabla_edad$frecuencia_porcentual) - 100
   ) < 1e-10,
-  
+
   absoluta_acumulada = tail(
     tabla_edad$frecuencia_absoluta_acumulada, 1
   ) == N_edad,
-  
+
   relativa_acumulada = abs(
     tail(tabla_edad$frecuencia_relativa_acumulada, 1) - 1
   ) < 1e-10,
-  
+
   porcentual_acumulada = abs(
     tail(tabla_edad$frecuencia_porcentual_acumulada, 1) - 100
   ) < 1e-10
-  
+
 )
 
 print(validacion_frecuencias_edad)
@@ -512,50 +512,50 @@ print(round(tabla_porcentual_edad_sexo, 4))
 # ------------------------------------------------------------
 
 validacion_edad_sexo <- c(
-  
+
   dimensiones = all(
     dim(frecuencias_absolutas_edad_sexo) == c(22, 2)
   ),
-  
+
   integridad = (
     !anyNA(frecuencias_absolutas_edad_sexo) &&
       all(frecuencias_absolutas_edad_sexo >= 0)
   ),
-  
+
   total_nacional = (
     sum(frecuencias_absolutas_edad_sexo) ==
       poblacion_nacional$poblacion_total
   ),
-  
+
   total_hombres = (
     sum(frecuencias_absolutas_edad_sexo[, "Hombres"]) ==
       poblacion_nacional$hombres
   ),
-  
+
   total_mujeres = (
     sum(frecuencias_absolutas_edad_sexo[, "Mujeres"]) ==
       poblacion_nacional$mujeres
   ),
-  
+
   totales_edad = all(
     rowSums(frecuencias_absolutas_edad_sexo) ==
       edad_sexo$poblacion_total
   ),
-  
+
   frecuencia_relativa = isTRUE(
     all.equal(
       sum(frecuencias_relativas_edad_sexo),
       1
     )
   ),
-  
+
   frecuencia_porcentual = isTRUE(
     all.equal(
       sum(frecuencias_relativas_edad_sexo * 100),
       100
     )
   )
-  
+
 )
 
 
@@ -703,54 +703,54 @@ tolerancia_condicional <- 1e-10
 # Integrar las comprobaciones
 
 validacion_condicionales <- c(
-  
+
   dimensiones_filas = all(
     dim(frecuencias_condicionales_filas) == c(22, 2)
   ),
-  
+
   dimensiones_columnas = all(
     dim(frecuencias_condicionales_columnas) == c(22, 2)
   ),
-  
+
   integridad = (
     all(is.finite(frecuencias_condicionales_filas)) &&
       all(is.finite(frecuencias_condicionales_columnas))
   ),
-  
+
   rango_filas = all(
     frecuencias_condicionales_filas >= 0 &
       frecuencias_condicionales_filas <= 1
   ),
-  
+
   rango_columnas = all(
     frecuencias_condicionales_columnas >= 0 &
       frecuencias_condicionales_columnas <= 1
   ),
-  
+
   relativas_filas = all(
     abs(
       rowSums(frecuencias_condicionales_filas) - 1
     ) < tolerancia_condicional
   ),
-  
+
   relativas_columnas = all(
     abs(
       colSums(frecuencias_condicionales_columnas) - 1
     ) < tolerancia_condicional
   ),
-  
+
   porcentuales_filas = all(
     abs(
       rowSums(porcentajes_condicionales_filas) - 100
     ) < tolerancia_condicional
   ),
-  
+
   porcentuales_columnas = all(
     abs(
       colSums(porcentajes_condicionales_columnas) - 100
     ) < tolerancia_condicional
   )
-  
+
 )
 
 
@@ -896,18 +896,18 @@ print(frecuencias_porcentuales_entidades)
 # ------------------------------------------------------------
 
 tabla_entidades <- data.frame(
-  
+
   entidad = poblacion_entidades$entidad,
-  
+
   frecuencia_absoluta =
     frecuencias_absolutas_entidades,
-  
+
   frecuencia_relativa =
     frecuencias_relativas_entidades,
-  
+
   frecuencia_porcentual =
     frecuencias_porcentuales_entidades
-  
+
 )
 
 
@@ -965,46 +965,46 @@ print(tabla_entidades)
 # ------------------------------------------------------------
 
 validacion_entidades <- c(
-  
+
   cobertura = (
     nrow(tabla_entidades) == 32
   ),
-  
+
   duplicados = (
     !anyDuplicated(tabla_entidades$entidad)
   ),
-  
+
   integridad = (
     !anyNA(tabla_entidades)
   ),
-  
+
   valores_positivos = all(
     tabla_entidades$frecuencia_absoluta > 0
   ),
-  
+
   absoluta = (
     sum(tabla_entidades$frecuencia_absoluta) ==
       poblacion_nacional$poblacion_total
   ),
-  
+
   relativa = isTRUE(
     all.equal(
       sum(tabla_entidades$frecuencia_relativa),
       1
     )
   ),
-  
+
   porcentual = isTRUE(
     all.equal(
       sum(tabla_entidades$frecuencia_porcentual),
       100
     )
   ),
-  
+
   orden = all(
     diff(tabla_entidades$frecuencia_absoluta) <= 0
   )
-  
+
 )
 
 
@@ -1025,20 +1025,20 @@ stopifnot(
 # ------------------------------------------------------------
 
 total_entidades <- data.frame(
-  
+
   posicion = NA_integer_,
-  
+
   entidad = "Total nacional",
-  
+
   frecuencia_absoluta =
     sum(tabla_entidades$frecuencia_absoluta),
-  
+
   frecuencia_relativa =
     sum(tabla_entidades$frecuencia_relativa),
-  
+
   frecuencia_porcentual =
     sum(tabla_entidades$frecuencia_porcentual)
-  
+
 )
 
 
@@ -1278,69 +1278,69 @@ tolerancia_entidad_sexo <- 1e-10
 
 
 validacion_entidad_sexo <- c(
-  
+
   dimensiones = all(
     dim(frecuencias_absolutas_entidad_sexo) == c(32, 2)
   ),
-  
+
   integridad = (
     all(is.finite(frecuencias_absolutas_entidad_sexo)) &&
       all(frecuencias_absolutas_entidad_sexo >= 0)
   ),
-  
+
   total_nacional = (
     sum(frecuencias_absolutas_entidad_sexo) ==
       poblacion_nacional$poblacion_total
   ),
-  
+
   total_hombres = (
     sum(frecuencias_absolutas_entidad_sexo[, "Hombres"]) ==
       poblacion_nacional$hombres
   ),
-  
+
   total_mujeres = (
     sum(frecuencias_absolutas_entidad_sexo[, "Mujeres"]) ==
       poblacion_nacional$mujeres
   ),
-  
+
   totales_estatales = all(
     rowSums(frecuencias_absolutas_entidad_sexo) ==
       entidad_sexo$poblacion_total
   ),
-  
+
   frecuencia_relativa = isTRUE(
     all.equal(
       sum(frecuencias_relativas_entidad_sexo),
       1
     )
   ),
-  
+
   frecuencia_porcentual = isTRUE(
     all.equal(
       sum(frecuencias_relativas_entidad_sexo * 100),
       100
     )
   ),
-  
+
   distribucion_marginal = all(
     abs(
       rowSums(frecuencias_relativas_entidad_sexo) -
         tabla_entidades$frecuencia_relativa
     ) < tolerancia_entidad_sexo
   ),
-  
+
   condicional_filas = all(
     abs(
       rowSums(relativas_entidad_sexo_filas) - 1
     ) < tolerancia_entidad_sexo
   ),
-  
+
   condicional_columnas = all(
     abs(
       colSums(relativas_entidad_sexo_columnas) - 1
     ) < tolerancia_entidad_sexo
   )
-  
+
 )
 
 
@@ -1689,69 +1689,69 @@ tolerancia_entidad_edad <- 1e-10
 
 
 validacion_entidad_edad <- c(
-  
+
   dimensiones = all(
     dim(frecuencias_absolutas_entidad_edad) == c(32, 22)
   ),
-  
+
   integridad = (
     all(is.finite(frecuencias_absolutas_entidad_edad)) &&
       all(frecuencias_absolutas_entidad_edad >= 0)
   ),
-  
+
   total_nacional = (
     sum(frecuencias_absolutas_entidad_edad) ==
       poblacion_nacional$poblacion_total
   ),
-  
+
   totales_estatales = all(
     rowSums(frecuencias_absolutas_entidad_edad) ==
       tabla_entidades$frecuencia_absoluta
   ),
-  
+
   totales_edad = all(
     colSums(frecuencias_absolutas_entidad_edad) ==
       referencia_edad_nacional$poblacion_total
   ),
-  
+
   frecuencia_relativa = isTRUE(
     all.equal(
       sum(frecuencias_relativas_entidad_edad),
       1
     )
   ),
-  
+
   frecuencia_porcentual = isTRUE(
     all.equal(
       sum(frecuencias_relativas_entidad_edad * 100),
       100
     )
   ),
-  
+
   relativas_filas = all(
     abs(
       rowSums(relativas_entidad_edad_filas) - 1
     ) < tolerancia_entidad_edad
   ),
-  
+
   relativas_columnas = all(
     abs(
       colSums(relativas_entidad_edad_columnas) - 1
     ) < tolerancia_entidad_edad
   ),
-  
+
   porcentuales_filas = all(
     abs(
       rowSums(porcentajes_entidad_edad_filas) - 100
     ) < tolerancia_entidad_edad
   ),
-  
+
   porcentuales_columnas = all(
     abs(
       colSums(porcentajes_entidad_edad_columnas) - 100
     ) < tolerancia_entidad_edad
   )
-  
+
 )
 
 
@@ -1770,21 +1770,21 @@ stopifnot(all(validacion_entidad_edad))
 # ------------------------------------------------------------
 
 estructura_edad_puebla <- data.frame(
-  
+
   grupo_edad = orden_edad_sexo,
-  
+
   frecuencia_absoluta = as.numeric(
     frecuencias_absolutas_entidad_edad["Puebla", ]
   ),
-  
+
   porcentaje_estatal = as.numeric(
     porcentajes_entidad_edad_filas["Puebla", ]
   ),
-  
+
   porcentaje_nacional_grupo = as.numeric(
     porcentajes_entidad_edad_columnas["Puebla", ]
   )
-  
+
 )
 
 
@@ -1828,25 +1828,25 @@ print(
 # ------------------------------------------------------------
 
 comprobaciones_modulo_02 <- unlist(
-  
+
   list(
-    
+
     sexo = validacion_frecuencias_sexo,
-    
+
     edad = validacion_frecuencias_edad,
-    
+
     edad_sexo = validacion_edad_sexo,
-    
+
     condicionales = validacion_condicionales,
-    
+
     entidades = validacion_entidades,
-    
+
     entidad_sexo = validacion_entidad_sexo,
-    
+
     entidad_edad = validacion_entidad_edad
-    
+
   )
-  
+
 )
 
 
@@ -1887,11 +1887,11 @@ stopifnot(
 # ------------------------------------------------------------
 
 informe_validacion_modulo_02 <- data.frame(
-  
+
   comprobacion = names(comprobaciones_modulo_02),
-  
+
   resultado = as.logical(comprobaciones_modulo_02)
-  
+
 )
 
 
@@ -1933,21 +1933,21 @@ preparar_tabla_exportacion <- function(
     matriz,
     nombre_categoria
 ) {
-  
+
   resultado <- data.frame(
     categoria = rownames(matriz),
     as.data.frame.matrix(matriz),
     check.names = FALSE,
     row.names = NULL
   )
-  
+
   names(resultado) <- c(
     nombre_categoria,
     colnames(matriz)
   )
-  
+
   return(resultado)
-  
+
 }
 
 
@@ -1956,17 +1956,17 @@ preparar_tabla_exportacion <- function(
 # ------------------------------------------------------------
 
 tabla_cobertura_edad <- data.frame(
-  
+
   categoria = c(
     "Edad especificada",
     "Edad no especificada"
   ),
-  
+
   frecuencia_absoluta = c(
     N_edad,
     N_no_especificada
   )
-  
+
 )
 
 
@@ -1984,129 +1984,129 @@ tabla_cobertura_edad$frecuencia_porcentual <-
 # ------------------------------------------------------------
 
 tablas_modulo_02 <- list(
-  
+
   # Distribuciones univariadas
-  
+
   "01_frecuencias_sexo" = tabla_sexo,
-  
+
   "02_frecuencias_edad" = tabla_edad,
-  
+
   "03_frecuencias_entidades" = tabla_entidades,
-  
+
   "04_cobertura_informacion_edad" =
     tabla_cobertura_edad,
-  
-  
+
+
   # Distribuciones conjuntas por edad y sexo
-  
+
   "05_edad_sexo_absoluta" =
     preparar_tabla_exportacion(
       tabla_absoluta_edad_sexo,
       "grupo_edad"
     ),
-  
+
   "06_edad_sexo_relativa" =
     preparar_tabla_exportacion(
       tabla_relativa_edad_sexo,
       "grupo_edad"
     ),
-  
+
   "07_edad_sexo_porcentual" =
     preparar_tabla_exportacion(
       tabla_porcentual_edad_sexo,
       "grupo_edad"
     ),
-  
+
   "08_edad_sexo_condicional_filas" =
     preparar_tabla_exportacion(
       tabla_condicional_filas,
       "grupo_edad"
     ),
-  
+
   "09_edad_sexo_condicional_columnas" =
     preparar_tabla_exportacion(
       tabla_condicional_columnas,
       "grupo_edad"
     ),
-  
-  
+
+
   # Distribuciones conjuntas por entidad y sexo
-  
+
   "10_entidad_sexo_absoluta" =
     preparar_tabla_exportacion(
       tabla_absoluta_entidad_sexo,
       "entidad"
     ),
-  
+
   "11_entidad_sexo_relativa" =
     preparar_tabla_exportacion(
       tabla_relativa_entidad_sexo,
       "entidad"
     ),
-  
+
   "12_entidad_sexo_porcentual" =
     preparar_tabla_exportacion(
       tabla_porcentual_entidad_sexo,
       "entidad"
     ),
-  
+
   "13_entidad_sexo_condicional_filas" =
     preparar_tabla_exportacion(
       tabla_entidad_sexo_filas,
       "entidad"
     ),
-  
+
   "14_entidad_sexo_condicional_columnas" =
     preparar_tabla_exportacion(
       tabla_entidad_sexo_columnas,
       "entidad"
     ),
-  
-  
+
+
   # Distribuciones conjuntas por entidad y edad
-  
+
   "15_entidad_edad_absoluta" =
     preparar_tabla_exportacion(
       tabla_absoluta_entidad_edad,
       "entidad"
     ),
-  
+
   "16_entidad_edad_relativa" =
     preparar_tabla_exportacion(
       tabla_relativa_entidad_edad,
       "entidad"
     ),
-  
+
   "17_entidad_edad_porcentual" =
     preparar_tabla_exportacion(
       tabla_porcentual_entidad_edad,
       "entidad"
     ),
-  
+
   "18_entidad_edad_condicional_filas" =
     preparar_tabla_exportacion(
       tabla_entidad_edad_filas,
       "entidad"
     ),
-  
+
   "19_entidad_edad_condicional_columnas" =
     preparar_tabla_exportacion(
       tabla_entidad_edad_columnas,
       "entidad"
     ),
-  
-  
+
+
   # Aplicación territorial
-  
+
   "20_estructura_edad_puebla" =
     estructura_edad_puebla,
-  
-  
+
+
   # Informe de validación
-  
+
   "21_informe_validacion" =
     informe_validacion_modulo_02
-  
+
 )
 
 
@@ -2125,19 +2125,19 @@ print(names(tablas_modulo_02))
 # ------------------------------------------------------------
 
 for (nombre in names(tablas_modulo_02)) {
-  
+
   ruta_archivo <- file.path(
     ruta_resultados_modulo_02,
     paste0(nombre, ".csv")
   )
-  
+
   write.csv(
     tablas_modulo_02[[nombre]],
     file = ruta_archivo,
     row.names = FALSE,
     fileEncoding = "UTF-8"
   )
-  
+
 }
 
 
@@ -2162,14 +2162,14 @@ saveRDS(
 # ------------------------------------------------------------
 
 archivos_csv_modulo_02 <- file.path(
-  
+
   ruta_resultados_modulo_02,
-  
+
   paste0(
     names(tablas_modulo_02),
     ".csv"
   )
-  
+
 )
 
 
@@ -2204,11 +2204,11 @@ resultados_recuperados_modulo_02 <- readRDS(
 
 
 integridad_rds_modulo_02 <- identical(
-  
+
   tablas_modulo_02,
-  
+
   resultados_recuperados_modulo_02
-  
+
 )
 
 
@@ -2223,30 +2223,30 @@ stopifnot(integridad_rds_modulo_02)
 # ------------------------------------------------------------
 
 validacion_csv_modulo_02 <- sapply(
-  
+
   names(tablas_modulo_02),
-  
+
   function(nombre) {
-    
+
     tabla_original <- tablas_modulo_02[[nombre]]
-    
+
     tabla_recuperada <- read.csv(
-      
+
       file.path(
         ruta_resultados_modulo_02,
         paste0(nombre, ".csv")
       ),
-      
+
       fileEncoding = "UTF-8",
-      
+
       stringsAsFactors = FALSE,
-      
+
       check.names = FALSE
-      
+
     )
-    
+
     # Verificar dimensiones y nombres de columnas
-    
+
     estructura_correcta <- (
       identical(
         dim(tabla_original),
@@ -2257,19 +2257,19 @@ validacion_csv_modulo_02 <- sapply(
           names(tabla_recuperada)
         )
     )
-    
+
     # Comparar el contenido
-    
+
     contenido_correcto <- all(
-      
+
       mapply(
-        
+
         function(original, recuperado) {
-          
+
           if (is.factor(original)) {
             original <- as.character(original)
           }
-          
+
           isTRUE(
             all.equal(
               original,
@@ -2278,24 +2278,24 @@ validacion_csv_modulo_02 <- sapply(
               check.attributes = FALSE
             )
           )
-          
+
         },
-        
+
         tabla_original,
-        
+
         tabla_recuperada
-        
+
       )
-      
+
     )
-    
+
     return(
       estructura_correcta &&
         contenido_correcto
     )
-    
+
   }
-  
+
 )
 
 
