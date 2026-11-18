@@ -8,210 +8,397 @@
 
 Este repositorio desarrolla un análisis estadístico descriptivo de la estructura demográfica de México mediante **R**, utilizando información oficial del **Censo de Población y Vivienda 2020** del Instituto Nacional de Estadística y Geografía (INEGI).
 
-El proyecto busca comprender la composición de la población por **edad y sexo**, organizar datos censales, construir indicadores y elaborar visualizaciones reproducibles. Está dirigido al aprendizaje de estadística aplicada a la **Economía, la Ciencia Política, las Políticas Públicas y la Economía Política**.
+El proyecto busca comprender la composición de la población por edad y sexo, organizar datos censales, construir indicadores y elaborar visualizaciones reproducibles.
 
-Aunque las técnicas computacionales serán inicialmente básicas, se documentarán las definiciones, las decisiones de procesamiento y los límites de interpretación de cada indicador.
+Está dirigido al aprendizaje de estadística aplicada a la **Economía, la Ciencia Política, las Políticas Públicas y la Economía Política**.
+
+Aunque las técnicas computacionales son inicialmente básicas, se mantiene rigor en las definiciones estadísticas, los procedimientos de procesamiento, la validación de resultados y sus límites de interpretación.
 
 ## 2. Contexto demográfico de México
 
 ### 2.1. La demografía y el estudio de la población mexicana
 
-La demografía estudia el tamaño, la estructura, la distribución y las transformaciones de las poblaciones humanas. En México, su desarrollo como campo científico ha estado ligado a la producción de información estadística y a la formulación de políticas de población. Welti-Chanes (2011) reconstruye esa trayectoria y explica la importancia del conocimiento demográfico para comprender las relaciones entre crecimiento poblacional y condiciones sociales.
+La demografía estudia el tamaño, la estructura, la distribución y las transformaciones de las poblaciones humanas.
 
-Desde esta perspectiva, estudiar la composición por edad y sexo no significa únicamente contar habitantes. Permite describir características fundamentales de una sociedad e identificar diferencias relevantes para el análisis económico, político y territorial.
+En México, su desarrollo como campo científico ha estado ligado a la producción de información estadística y a la formulación de políticas de población. Welti-Chanes (2011) reconstruye esa trayectoria y explica la importancia del conocimiento demográfico para comprender las relaciones entre crecimiento poblacional y condiciones sociales.
 
-### 2.2. Transición demográfica y cambios en la estructura por edades
+Desde esta perspectiva, estudiar la composición por edad y sexo permite identificar diferencias relevantes para el análisis económico, político, social y territorial.
 
-La población mexicana experimentó transformaciones importantes durante el siglo XX, vinculadas con la evolución de la mortalidad, la fecundidad y la migración. Partida Bush (2005) señala que las distintas etapas de la transición demográfica dejan huellas en la estructura por edades y contribuyen a explicar el proceso de envejecimiento poblacional.
+### 2.2. Transición demográfica y estructura por edades
 
-Estos cambios no ocurrieron de manera uniforme. Benítez Zenteno (2002) analiza el carácter desigual de la transición demográfica mexicana, atendiendo a sus componentes poblacionales y a sus relaciones con la organización familiar, el desarrollo urbano y la política de población.
+La población mexicana experimentó transformaciones importantes durante el siglo XX, vinculadas con la evolución de la mortalidad, la fecundidad y la migración.
+
+Partida Bush (2005) señala que las distintas etapas de la transición demográfica dejan huellas en la estructura por edades y contribuyen a explicar el proceso de envejecimiento poblacional.
+
+Tuirán (2002, p. 25) vincula la transición demográfica con las transformaciones de las trayectorias individuales y familiares y con cambios en la organización social.
+
+Benítez Zenteno (2002) examina las relaciones entre la organización familiar y la política de población en México.
 
 ### 2.3. Características de la población en 2020
 
-Según los resultados del Censo de Población y Vivienda 2020, en México residían **126 014 024 personas**: **64 540 634 mujeres (51,2 %)** y **61 473 390 hombres (48,8 %)**. La **edad mediana** fue de **29 años**, frente a **22 años en 2000** y **26 años en 2010** (INEGI, 2021c, pp. 1–2).
+Según el Censo de Población y Vivienda 2020, México registró una población de 126,014,024 habitantes.
 
-El INEGI (2023, pp. 1–3) describe una reducción del ritmo de crecimiento poblacional y cambios en la distribución por edades, visibles en el menor peso relativo de los grupos situados en la base de la pirámide poblacional. Estos datos ofrecen un punto de partida para caracterizar la estructura demográfica nacional sin confundir el análisis descriptivo de 2020 con una explicación causal de sus transformaciones históricas.
+| Indicador | Resultado |
+|---|---:|
+| Población total | 126,014,024 |
+| Hombres | 61,473,390 |
+| Mujeres | 64,540,634 |
+| Edad mediana oficial | 29 años |
+| Entidades federativas | 32 |
+
+La edad mediana pasó de 22 años en 2000 a 26 años en 2010 y 29 años en 2020 (INEGI, 2021c, pp. 1–2).
+
+El INEGI (2023) documenta transformaciones en la composición de la población por edad y sexo que permiten contextualizar el análisis de la estructura demográfica mexicana.
 
 ### 2.4. Diferencias territoriales
 
-La distribución de la población también presenta diferencias importantes entre entidades federativas. La heterogeneidad territorial es pertinente para estudiar la composición por edades y sexo a distintas escalas. Desde el campo de los estudios urbanos, Sobrino (2024) documenta patrones diferenciados de dinámica demográfica y expansión territorial en ciudades mexicanas entre 1990 y 2020.
+Sobrino (2024) examina patrones diferenciados de dinámica demográfica y expansión territorial en las ciudades mexicanas entre 1990 y 2020.
 
-Este repositorio se concentra en la **comparación entre entidades federativas**, no en reproducir el análisis urbano de Sobrino. Su trabajo se utiliza como antecedente académico de la relevancia de la dimensión territorial.
+El presente proyecto se concentra en la comparación descriptiva entre entidades federativas, utilizando criterios estadísticos homogéneos.
 
 ### 2.5. Relevancia para las ciencias sociales
 
-- **Economía:** la estructura por edades contextualiza el estudio de la población potencialmente vinculada al mercado laboral y de las necesidades de consumo y protección social.
-- **Ciencia Política:** la composición demográfica proporciona contexto para investigaciones sobre representación, participación y distribución territorial de la población.
-- **Políticas Públicas:** las diferencias por edad, sexo y territorio ayudan a describir poblaciones relevantes para la planeación de servicios educativos, sanitarios y de cuidados.
-- **Economía Política:** la estructura poblacional puede contextualizar discusiones sobre transformaciones económicas, distribución de recursos y organización social.
+- **Economía:** estructura poblacional, oferta potencial de trabajo, consumo y protección social.
+- **Ciencia Política:** representación política, participación y distribución territorial de la población.
+- **Políticas Públicas:** planificación de servicios educativos, sanitarios, sociales y de cuidados.
+- **Economía Política:** cambio demográfico, distribución de recursos y organización económica y social.
 
-Estas conexiones son **ámbitos posibles de interpretación**, no efectos causales identificados por el proyecto.
+Estas relaciones constituyen posibilidades de interpretación, no efectos causales identificados por el proyecto.
 
 ## 3. Planteamiento del problema
 
-La estructura demográfica nacional puede resumirse mediante cifras agregadas, pero estas no muestran por sí solas cómo se distribuye la población entre grupos de edad y sexo ni cómo varía dicha composición entre entidades federativas. Para describir esas diferencias se requieren datos comparables, definiciones consistentes y procedimientos estadísticos verificables.
+La estructura demográfica nacional puede resumirse mediante cifras agregadas, pero estas no muestran por sí solas cómo se distribuye la población entre grupos de edad y sexo ni cómo varía dicha composición entre entidades federativas.
 
-**Pregunta principal:** ¿Cómo se distribuye la población mexicana por edad y sexo y qué diferencias presenta su estructura demográfica entre las entidades federativas, según el Censo de Población y Vivienda 2020?
+Para describir estas diferencias se requieren datos comparables, definiciones consistentes y procedimientos estadísticos verificables.
 
-**Alcance:** estudio cuantitativo, transversal y descriptivo. No se formularán conclusiones causales a partir de asociaciones o diferencias entre grupos.
+**Pregunta principal:**
+
+¿Cómo se distribuye la población mexicana por edad y sexo y qué diferencias presenta su estructura demográfica entre las entidades federativas, según el Censo de Población y Vivienda 2020?
 
 ## 4. Objetivos
 
-### Objetivo general
+### 4.1. Objetivo general
 
-Analizar la estructura demográfica de México por edad y sexo mediante técnicas de estadística descriptiva implementadas en R, a partir de información censal oficial correspondiente a 2020.
+Analizar la estructura demográfica de México por edad y sexo mediante técnicas de estadística descriptiva implementadas en R, utilizando información censal oficial correspondiente a 2020.
 
-### Objetivos específicos
+### 4.2. Objetivos específicos
 
-1. Importar, inspeccionar y validar tabulados demográficos del INEGI.
-2. Construir distribuciones de frecuencias absolutas y relativas por sexo y grupos de edad.
-3. Calcular indicadores demográficos básicos, documentando sus fórmulas y denominadores.
-4. Elaborar tablas, gráficos y pirámides poblacionales reproducibles.
-5. Comparar indicadores descriptivos entre las 32 entidades federativas.
-6. Distinguir los cálculos exactos de aquellos que exigirían microdatos o aproximaciones a partir de datos agrupados.
-7. Interpretar los resultados desde las ciencias sociales sin exceder los límites de la evidencia disponible.
+1. Importar, explorar y validar los tabulados demográficos del INEGI.
+2. Construir distribuciones de frecuencias univariadas y bivariadas.
+3. Calcular medidas estadísticas descriptivas.
+4. Construir indicadores demográficos básicos.
+5. Elaborar tablas, gráficos y pirámides poblacionales.
+6. Comparar la estructura demográfica de las 32 entidades federativas.
+7. Garantizar la reproducibilidad de los procedimientos estadísticos.
+8. Interpretar los resultados desde las ciencias sociales.
 
 ## 5. Delimitación
 
 | Elemento | Definición |
 |---|---|
 | País | México |
-| Periodo principal | 2020 |
-| Cobertura territorial | Nacional y 32 entidades federativas |
-| Fuente principal | Censo de Población y Vivienda 2020 (INEGI) |
-| Objeto de estudio | Composición de la población por edad y sexo |
-| Datos previstos | Tabulados oficiales por grupos quinquenales de edad y sexo |
-| Unidad de registro de trabajo | Celda agregada: territorio × grupo de edad × sexo |
-| Enfoque y alcance | Cuantitativo y descriptivo |
-| Herramienta | R (RStudio como entorno de trabajo) |
+| Año de referencia | 2020 |
+| Cobertura | Nacional y estatal |
+| Fuente | Censo de Población y Vivienda 2020 |
+| Objeto de estudio | Estructura demográfica por edad y sexo |
+| Enfoque | Cuantitativo |
+| Alcance | Descriptivo |
+| Diseño | Transversal |
+| Unidad de registro | Territorio y grupo de edad |
+| Herramienta computacional | R |
+| Entorno de desarrollo | RStudio |
 
-Los valores de 2000 y 2010 se presentan únicamente como **antecedentes contextuales**; el análisis principal se delimita a 2020.
+Los datos corresponden a registros censales agregados, no a microdatos individuales.
 
 ## 6. Fuentes de información
 
-La fuente empírica principal será la tabla interactiva del INEGI **«Población total por entidad federativa y grupo quinquenal de edad según sexo, serie de años censales de 1990 a 2020»**. Para los procedimientos de 2020 se descargarán los datos seleccionados y se conservará una copia original sin modificaciones.
+La fuente principal corresponde al tabulado oficial:
 
-Los documentos **Marco conceptual** y **Síntesis metodológica y conceptual** del Censo 2020 se emplearán para verificar definiciones, cobertura, fecha de referencia y criterios de clasificación (INEGI, 2021a, 2021b). Se registrarán la fecha de descarga y la tabla o archivo específico utilizado.
+**Población total por entidad federativa y grupo quinquenal de edad según sexo, serie de años censales de 1990 a 2020.**
 
-**Fuentes oficiales de consulta:**
+Se utilizan exclusivamente los datos correspondientes a 2020.
+
+### Fuentes oficiales
 
 - [Censo de Población y Vivienda 2020](https://www.inegi.org.mx/programas/ccpv/2020/)
-- [Tabulados oficiales por entidad, edad y sexo](https://www.inegi.org.mx/app/tabulados/interactivos/?pxq=Poblacion_Poblacion_01_b0cd5bac-d8a2-4c83-95d5-7e3b97518d1e)
-- [Marco conceptual del Censo 2020](https://www.inegi.org.mx/app/biblioteca/ficha.html?upc=702825197520)
-- [Síntesis metodológica y conceptual del Censo 2020](https://www.inegi.org.mx/app/biblioteca/ficha.html?upc=702825197537)
+- [Tabulados oficiales](https://www.inegi.org.mx/app/tabulados/interactivos/?pxq=Poblacion_Poblacion_01_b0cd5bac-d8a2-4c83-95d5-7e3b97518d1e)
+- [Marco conceptual](https://www.inegi.org.mx/app/biblioteca/ficha.html?upc=702825197520)
+- [Síntesis metodológica y conceptual](https://www.inegi.org.mx/app/biblioteca/ficha.html?upc=702825197537)
 
-## 7. Variables e indicadores iniciales
+La documentación de las fuentes puede consultarse en:
 
-| Variable o indicador | Tipo / unidad | Consideración metodológica |
-|---|---|---|
-| Población total | Conteo de personas | Comprobar su concordancia con el total censal publicado. |
-| Sexo censal | Categoría | Utilizar las categorías originales; documentar valores no especificados si existen. |
-| Grupo quinquenal de edad | Categoría ordinal | Conservar la agrupación oficial y el tratamiento de edades no especificadas. |
-| Entidad federativa | Categoría nominal | Emplear claves y denominaciones oficiales. |
-| Participación por sexo | Porcentaje | Explicitar si el denominador incluye todas las categorías publicadas. |
-| Participación por grupo de edad | Porcentaje | Definir cómo se trata la edad no especificada. |
-| Relación hombres-mujeres | Hombres por cada 100 mujeres | Indicar con claridad el numerador y el denominador. |
-| Razón de dependencia demográfica | Personas de 0–14 y 65+ por cada 100 de 15–64 | Indicador convencional por edades; no mide dependencia económica efectiva. |
+[Fuentes estadísticas](documentacion/fuentes_estadisticas.md).
 
-**Precisión sobre datos agrupados:** los totales, porcentajes y razones calculados con conteos censales pueden obtenerse directamente de los tabulados. En cambio, **la media, la varianza, la desviación estándar y los cuantiles exactos de la edad individual no pueden recuperarse, en general, solamente a partir de grupos quinquenales**. Cuando corresponda, se consultarán medidas oficiales publicadas o se presentarán estimaciones por intervalos claramente identificadas como aproximaciones. La categoría abierta «85 años y más» y las edades no especificadas requieren atención especial.
+## 7. Variables e indicadores
+
+| Variable | Tipo o unidad |
+|---|---|
+| Entidad federativa | Cualitativa nominal |
+| Grupo de edad especificada | Cualitativa ordinal |
+| Sexo censal | Cualitativa nominal |
+| Población total | Conteo de personas |
+| Población masculina | Conteo de personas |
+| Población femenina | Conteo de personas |
+
+### Indicadores estadísticos
+
+- Frecuencia absoluta.
+- Frecuencia relativa.
+- Frecuencia porcentual.
+- Frecuencia acumulada.
+- Frecuencia conjunta.
+- Frecuencia marginal.
+- Frecuencia condicional.
+- Medidas de tendencia central.
+- Medidas de dispersión.
+- Medidas de posición.
+
+### Indicadores demográficos previstos
+
+- Relación hombres-mujeres.
+- Razón de dependencia demográfica.
+- Índice de envejecimiento.
+- Distribución por grandes grupos de edad.
+- Participación territorial de la población.
+
+Los indicadores de dependencia demográfica no equivalen necesariamente a medidas de dependencia económica efectiva.
 
 ## 8. Estrategia metodológica
 
-El análisis seguirá una secuencia única para facilitar su verificación:
+El análisis sigue una secuencia reproducible:
 
-1. **Adquisición:** seleccionar y descargar la información oficial de 2020.
-2. **Preservación:** mantener intacta la copia descargada.
-3. **Inspección:** identificar nombres de columnas, tipos de variables, categorías, unidades y metadatos.
-4. **Validación:** verificar duplicados, valores faltantes, categorías no especificadas y coherencia de agregados.
-5. **Transformación:** construir una tabla analítica documentada, sin modificar la fuente original.
-6. **Cálculo:** obtener frecuencias, proporciones y razones demográficas con denominadores explícitos.
-7. **Visualización:** crear gráficos con títulos, ejes, unidades y fuente.
-8. **Comparación territorial:** aplicar definiciones uniformes a las 32 entidades federativas.
-9. **Interpretación:** comentar resultados descriptivos, limitaciones y posibles implicaciones para las ciencias sociales.
-10. **Reproducibilidad:** guardar los scripts, registrar las versiones de R y de los paquetes, y documentar cómo replicar el análisis.
+1. Adquisición de información oficial.
+2. Preservación de los datos originales.
+3. Inspección de la estructura de los datos.
+4. Validación de registros y totales.
+5. Preparación de la base analítica.
+6. Construcción de distribuciones de frecuencias.
+7. Cálculo de medidas estadísticas.
+8. Construcción de indicadores demográficos.
+9. Visualización estadística.
+10. Comparación territorial e interpretación.
 
-Las fórmulas se fundamentarán en documentación demográfica oficial y en bibliografía estadística. Como apoyo introductorio para los fundamentos de estadística se utilizará Illowsky y Dean (2023), complementado por las fuentes metodológicas del INEGI.
+El fundamento estadístico se apoya en Illowsky y Dean (2023), complementado con documentación metodológica y conceptual del INEGI.
+
+**Tratamiento de los datos agrupados:** los conteos y proporciones pueden calcularse directamente. Las medidas exactas de edad individual, como la media, la varianza y los cuantiles, no pueden recuperarse generalmente a partir de intervalos agrupados.
+
+El intervalo abierto «100 años y más» requiere un tratamiento metodológico específico.
 
 ## 9. Módulos del proyecto
 
-| Módulo | Contenido | Producto previsto |
+| Módulo | Contenido | Estado |
 |---|---|---|
-| 01 | Importación, exploración y validación de datos | Registro de la fuente, diccionario y controles de consistencia |
-| 02 | Distribuciones de frecuencias | Tablas por edad y sexo |
-| 03 | Medidas de tendencia central | Medidas oficiales o estimaciones justificadas, según los datos disponibles |
-| 04 | Medidas de dispersión | Análisis de dispersión para variables donde sea válido |
-| 05 | Medidas de posición | Cuantiles oficiales o aproximaciones debidamente identificadas |
-| 06 | Indicadores demográficos | Razones, proporciones y grupos de edad |
-| 07 | Visualización estadística | Pirámide poblacional y gráficos descriptivos |
-| 08 | Comparación entre entidades federativas | Tablas y gráficos territoriales |
+| 01 | Importación, exploración y validación | Completado |
+| 02 | Distribuciones de frecuencias | Completado |
+| 03 | Medidas de tendencia central | Pendiente |
+| 04 | Medidas de dispersión | Pendiente |
+| 05 | Medidas de posición | Pendiente |
+| 06 | Indicadores demográficos | Pendiente |
+| 07 | Visualización estadística | Pendiente |
+| 08 | Comparación entre entidades federativas | Pendiente |
 
-Los módulos 03–05 se ajustarán a la disponibilidad efectiva de datos: **no se inventarán edades individuales ni se presentarán aproximaciones como medidas exactas**.
+### 9.1. Módulo 01. Importación y validación
 
-## 10. Herramientas
+Se importaron, organizaron y validaron los datos censales originales.
 
-- **R:** procesamiento, análisis estadístico y generación de resultados.
-- **RStudio:** entorno de desarrollo opcional para organizar el trabajo.
-- **`readr` y `readxl`:** importación de archivos de texto y Excel, según el formato descargado.
-- **`dplyr` y `tidyr`:** preparación de datos y construcción de tablas.
-- **`ggplot2`:** visualización estadística.
-- **Quarto:** elaboración posterior del informe reproducible, si se instala y configura.
+| Indicador de control | Resultado |
+|---|---:|
+| Registros | 759 |
+| Variables | 5 |
+| Entidades federativas | 32 |
+| Agregado nacional | 1 |
+| Categorías por territorio | 23 |
+| Validación general | Aprobada |
 
-Solo se incorporarán dependencias cuando sean necesarias; se registrarán sus versiones y se documentará su instalación.
+**Archivos:**
 
-## 11. Estructura prevista del repositorio
+- [Script de R](codigo/01_importacion_validacion.R)
+- [Informe de validación](documentacion/resultados_validacion_modulo_01.md)
+- [Base validada CSV](datos/procesados/poblacion_mexico_2020_validada.csv)
+- [Base validada RDS](datos/procesados/poblacion_mexico_2020_validada.rds)
+
+### 9.2. Módulo 02. Distribuciones de frecuencias
+
+Se construyeron distribuciones univariadas, tablas de contingencia y distribuciones marginales y condicionales.
+
+Los resultados comprenden:
+
+- Distribución nacional por sexo.
+- Distribución nacional por edad.
+- Distribuciones conjuntas por edad y sexo.
+- Distribuciones condicionales por edad y sexo.
+- Distribución por entidad federativa.
+- Distribuciones por entidad federativa y sexo.
+- Distribuciones por entidad federativa y edad.
+- Aplicación territorial para Puebla.
+
+| Indicador de control | Resultado |
+|---|---:|
+| Validaciones estadísticas | 56 |
+| Validaciones aprobadas | 56 |
+| Archivos CSV | 21 |
+| Archivos RDS | 1 |
+| Integridad de archivos | Verificada |
+
+**Archivos:**
+
+- [Script de R](codigo/02_distribuciones_frecuencias.R)
+- [Informe académico](documentacion/resultados_modulo_02.md)
+- [Tablas estadísticas](resultados/tablas/modulo_02/)
+- [Informe de validación](resultados/tablas/modulo_02/21_informe_validacion.csv)
+- [Resultados consolidados RDS](resultados/tablas/modulo_02/resultados_modulo_02.rds)
+
+## 10. Principales resultados
+
+### 10.1. Distribución nacional por sexo
+
+| Sexo | Población | Participación (%) |
+|---|---:|---:|
+| Hombres | 61,473,390 | 48.7830 |
+| Mujeres | 64,540,634 | 51.2170 |
+| Total | 126,014,024 | 100.0000 |
+
+### 10.2. Cobertura de la información por edad
+
+| Categoría | Población | Participación (%) |
+|---|---:|---:|
+| Edad especificada | 125,740,638 | 99.7831 |
+| Edad no especificada | 273,386 | 0.2169 |
+| Total | 126,014,024 | 100.0000 |
+
+### 10.3. Estructura por edades
+
+Entre la población con edad especificada:
+
+| Grupo | Participación (%) |
+|---|---:|
+| Menores de 15 años | 25.2546 |
+| Menores de 30 años | 50.0849 |
+| Personas de 65 años y más | 8.2089 |
+
+El grupo de 10 a 14 años presenta la mayor frecuencia absoluta, con 10,943,540 habitantes.
+
+### 10.4. Distribución territorial
+
+| Posición | Entidad federativa | Población | Participación (%) |
+|---:|---|---:|---:|
+| 1 | Estado de México | 16,992,418 | 13.4845 |
+| 2 | Ciudad de México | 9,209,944 | 7.3087 |
+| 3 | Jalisco | 8,348,151 | 6.6248 |
+| 4 | Veracruz | 8,062,579 | 6.3982 |
+| 5 | Puebla | 6,583,278 | 5.2242 |
+
+Las cinco entidades más pobladas concentran el 39.0404 % de la población nacional.
+
+### 10.5. Composición por edad y sexo
+
+| Grupo de edad | Hombres (%) | Mujeres (%) |
+|---|---:|---:|
+| 0 a 4 años | 50.5355 | 49.4645 |
+| 20 a 24 años | 49.5667 | 50.4333 |
+| 65 a 69 años | 46.8262 | 53.1738 |
+| 80 a 84 años | 44.5659 | 55.4341 |
+| 100 años y más | 36.3159 | 63.6841 |
+
+Se observa una mayor participación femenina a partir del grupo de 20 a 24 años, especialmente en las edades avanzadas.
+
+### 10.6. Aplicación territorial: Puebla
+
+| Grupo de edad | Población | Participación estatal (%) |
+|---|---:|---:|
+| 0 a 4 años | 578,779 | 8.7917 |
+| 5 a 9 años | 598,550 | 9.0920 |
+| 10 a 14 años | 603,375 | 9.1653 |
+| 15 a 19 años | 607,200 | 9.2234 |
+| 20 a 24 años | 570,646 | 8.6681 |
+
+La población menor de 15 años representa el 27.0489 % de la población total de Puebla, frente al 25.1998 % de la población nacional total.
+
+Fuente: elaboración propia con información del Censo de Población y Vivienda 2020 (INEGI, s. f.).
+
+## 11. Herramientas computacionales
+
+- **R:** procesamiento y análisis estadístico.
+- **RStudio:** organización del proyecto.
+- **readxl:** importación de archivos Excel.
+- **Git:** control de versiones.
+- **GitHub:** documentación y publicación del proyecto.
+- **ggplot2:** visualización estadística prevista.
+- **Quarto:** elaboración posterior de informes reproducibles.
+
+## 12. Estructura del repositorio
 
 ```text
 estructura-demografica-mexico/
 ├── README.md
 ├── LICENSE
 ├── .gitignore
+├── estructura-demografica-mexico.Rproj
 ├── datos/
 │   ├── originales/
 │   └── procesados/
+│       ├── poblacion_mexico_2020_validada.csv
+│       └── poblacion_mexico_2020_validada.rds
 ├── codigo/
 │   ├── 01_importacion_validacion.R
-│   ├── 02_frecuencias.R
-│   ├── 03_tendencia_central.R
-│   ├── 04_dispersion.R
-│   ├── 05_posicion.R
-│   ├── 06_indicadores_demograficos.R
-│   ├── 07_visualizaciones.R
-│   └── 08_comparacion_territorial.R
-├── resultados/
-│   ├── tablas/
-│   └── graficos/
+│   └── 02_distribuciones_frecuencias.R
 ├── documentacion/
 │   ├── protocolo_metodologico.md
 │   ├── diccionario_variables.md
 │   ├── fuentes_estadisticas.md
-│   └── reproducibilidad.md
-└── informe/
-    └── estructura_demografica.qmd
+│   ├── resultados_validacion_modulo_01.md
+│   └── resultados_modulo_02.md
+└── resultados/
+    └── tablas/
+        └── modulo_02/
+            ├── 21 archivos CSV
+            └── resultados_modulo_02.rds
 ```
 
-Esta es la **estructura prevista**; los archivos y carpetas se crearán gradualmente durante el desarrollo.
+Los scripts y productos de los módulos siguientes se incorporarán gradualmente.
 
-## 12. Criterios de calidad y reproducibilidad
+## 13. Reproducibilidad
 
-- Emplear fuentes oficiales y bibliografía académica verificable.
-- Registrar el origen, la fecha de descarga y la versión de cada archivo.
-- No alterar ni sobrescribir los datos originales.
-- Distinguir celdas agregadas de observaciones individuales.
-- Comprobar los totales y subtotales frente a las cifras del INEGI.
-- Explicitar fórmulas, denominadores y criterios para los valores no especificados.
-- Presentar, cuando proceda, **cuatro decimales** en resultados estadísticos, sin redondear cálculos intermedios.
-- Documentar el código con comentarios en español.
-- Diferenciar hechos estadísticos, interpretación sustantiva y posibles hipótesis.
-- No inferir causalidad a partir de diferencias descriptivas.
-- Citar fuentes y documentos en **APA 7**, incluyendo páginas verificadas cuando se utilicen referencias puntuales o citas textuales.
+Para reproducir el análisis, abrir el proyecto en RStudio y ejecutar los scripts desde el directorio principal.
 
-## 13. Productos esperados
+```r
+# Módulo 01
+source("codigo/01_importacion_validacion.R")
 
-Se prevé generar una base procesada documentada, tablas de frecuencias, indicadores demográficos, una pirámide poblacional de México, comparaciones entre entidades federativas, scripts de R y un informe reproducible.
+# Módulo 02
+source("codigo/02_distribuciones_frecuencias.R")
+```
 
-**No se presentan resultados empíricos nuevos en esta versión del repositorio.** Las cifras incluidas en el contexto provienen de publicaciones oficiales del INEGI; los resultados propios se incorporarán únicamente después de ejecutar y validar el código.
+El módulo 02 también puede ejecutarse directamente utilizando la base RDS validada incluida en el repositorio.
 
-## 14. Referencias bibliográficas (APA 7)
+Los resultados se generan en:
+
+`resultados/tablas/modulo_02/`
+
+### Criterios de calidad
+
+- Utilizar información oficial y bibliografía verificable.
+- Preservar los archivos originales.
+- Comprobar la consistencia de los resultados.
+- Registrar las decisiones metodológicas.
+- Conservar la precisión numérica de los cálculos.
+- Presentar los resultados estadísticos con cuatro decimales cuando corresponda.
+- Documentar el código en español.
+- Utilizar referencias bibliográficas en APA 7.
+- No establecer relaciones causales mediante análisis descriptivos.
+
+## 14. Limitaciones metodológicas
+
+- El estudio corresponde exclusivamente al año 2020.
+- Se utilizan datos censales agregados.
+- No se dispone de edades individuales.
+- Las distribuciones acumuladas excluyen la edad no especificada.
+- Las tablas conjuntas conservan la categoría de edad no especificada.
+- No se realizan inferencias causales.
+- No se infieren tendencias demográficas a partir de un único año censal.
+- Las diferencias poblacionales territoriales no constituyen medidas de densidad demográfica.
+
+## 15. Referencias bibliográficas (APA 7)
 
 Benítez Zenteno, R. (2002). Familia, derecho y política de población en México. *Papeles de Población, 8*(32), 31–57. https://www.scielo.org.mx/scielo.php?pid=S1405-74252002000200003&script=sci_arttext
 
@@ -229,16 +416,35 @@ Instituto Nacional de Estadística y Geografía. (s. f.). *Población total por 
 
 Partida Bush, V. (2005). La transición demográfica y el proceso de envejecimiento en México. *Papeles de Población, 11*(45), 9–27. https://rppoblacion.uaemex.mx/article/view/8701
 
-Sobrino, J. (2024). Dinámica demográfica, forma urbana y densidad de población en ciudades de México, 1990-2020: ¿urbanización compacta o dispersa? *Estudios Demográficos y Urbanos, 39*(2), e2190. https://doi.org/10.24201/edu.v39i2.2190
+Sobrino, J. (2024). Dinámica demográfica, forma urbana y densidad de población en ciudades de México, 1990-2020: ¿urbanización compacta o dispersa? *Estudios Demográficos y Urbanos, 39*(2), 1–31. https://doi.org/10.24201/edu.v39i2.2190
+
+Tuirán, R. (2002). Transición demográfica, trayectorias de vida y desigualdad social en México: lecciones y opciones. *Papeles de Población, 8*(31), 25–66. https://www.redalyc.org/pdf/112/11203102.pdf
 
 Welti-Chanes, C. (2011). La demografía en México, las etapas iniciales de su evolución y sus aportaciones al desarrollo nacional. *Papeles de Población, 17*(69), 9–47. https://www.scielo.org.mx/scielo.php?pid=S1405-74252011000300002&script=sci_arttext
 
-## 15. Estado del proyecto
+## 16. Estado del proyecto
 
-**Etapa actual:** definición académica y metodológica del repositorio.
+- [x] Definición académica y metodológica.
+- [x] Módulo 01. Importación y validación.
+- [x] Módulo 02. Distribuciones de frecuencias.
+- [ ] Módulo 03. Medidas de tendencia central.
+- [ ] Módulo 04. Medidas de dispersión.
+- [ ] Módulo 05. Medidas de posición.
+- [ ] Módulo 06. Indicadores demográficos.
+- [ ] Módulo 07. Visualización estadística.
+- [ ] Módulo 08. Comparación territorial.
+- [ ] Informe final reproducible.
 
-**Siguiente etapa:** crear las carpetas de trabajo y comenzar el **Módulo 01: importación, exploración y validación de datos**.
+## 17. Autor
 
----
+**Aldo Rodríguez Lechuga**
 
-**Nota sobre licencias:** la licencia MIT del repositorio regula el código original que se publique aquí. Los datos del INEGI y los contenidos de las publicaciones citadas conservan sus propias condiciones de uso y atribución.
+Licenciado en Economía.
+
+Áreas de interés: Economía Política, Ciencia Política, Crecimiento y Desarrollo Económico, Políticas Públicas y Métodos Cuantitativos para las Ciencias Sociales.
+
+## 18. Licencia
+
+El código original del proyecto se distribuye bajo la licencia MIT.
+
+Los datos del INEGI y los contenidos de las publicaciones citadas conservan sus respectivas condiciones de uso y atribución.
